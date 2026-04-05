@@ -1,4 +1,6 @@
-package com.example.cache;
+package org.example.computer;
+
+import org.example.computer.CacheNode;
 
 import java.util.List;
 

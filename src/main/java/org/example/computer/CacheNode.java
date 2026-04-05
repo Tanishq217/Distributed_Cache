@@ -2,13 +2,13 @@ package org.example.computer;
 
 public class CacheNode {
     private final String nodeId;
-    private final EvictionPolicy<String, Object> evictionPolicy;
+    private final EvictionPolicy<Object, Object> evictionPolicy;
     private final int capacity;
 
     public CacheNode(String nodeId, int capacity) {
         this.nodeId = nodeId;
         this.capacity = capacity;
-        this.evictionPolicy = new LRUEvictionPolicy<>(capacity);
+        this.evictionPolicy = new LRUEvictionPolicy<Object, Object>(capacity);
     }
 
     public Object get(String key) {
@@ -32,7 +32,7 @@ public class CacheNode {
 
     private void evictIfNeeded() {
         if (evictionPolicy.getCache().size() >= capacity) {
-            K keyToEvict = evictionPolicy.getKeyToEvict();
+            Object keyToEvict = evictionPolicy.getKeyToEvict();
             if (keyToEvict != null) {
                 evictionPolicy.onKeyRemoved(keyToEvict);
             }
